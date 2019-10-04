@@ -33,15 +33,10 @@ create table request (
     total					decimal(10,2)   not null,
 	submitteddate     		datetime		not null ,
     reasonforrejection 		varchar(100) 
-    
 	);
     
-    ALTER TABLE request
-ADD FOREIGN KEY (userid) REFERENCES user(userid);
-
-
-
-   
+ ALTER TABLE request
+       ADD FOREIGN KEY (userid) REFERENCES user(userid);
 
 
 
@@ -72,8 +67,7 @@ Insert into vendor (code, name, address, city, state, zip, phonenumber, email) V
 	 constraint vendor_part unique (vendorid, partnumber)   
 	);
 ALTER TABLE product
-ADD FOREIGN KEY (vendorid) REFERENCES vendor(vendorid);
-
+      ADD FOREIGN KEY (vendorid) REFERENCES vendor(vendorid);
 
 
 Insert into product (vendorid, partnumber, name, price, unit)
@@ -81,8 +75,7 @@ values
 ('1','A123','conpany logo pencils','49.99','gross'),
 ('1','A122','company logo pencils','5.99','24pk');
 
-
-    
+ 
     
 create table lineitem (
 	lineitemid 		int 	not null primary key auto_increment,
@@ -92,12 +85,12 @@ create table lineitem (
     constraint req_pdt unique (requestid, productid)
 	);
 ALTER TABLE lineitem
-ADD FOREIGN KEY (requestid) REFERENCES request(requestid),
-add foreign key (productid) references product(productid);
+      ADD FOREIGN KEY (requestid) REFERENCES request(requestid),
+      ADD FOREIGN KEY (productid) REFERENCES product(productid);
 
 
 
-drop user  if exists psr_user@localhost ;
+DROP USER IF EXISTS psr_user@localhost ;
 CREATE USER psr_user@localhost IDENTIFIED BY 'sesame';
 GRANT SELECT, INSERT, DELETE, UPDATE ON psr.* TO psr_user@localhost;
 
